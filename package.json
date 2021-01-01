@@ -1,0 +1,11 @@
+{
+  "name": "visualisation",
+  "version": "1.0.0",
+  "description": "some experiments with visualisation of own timetracking database",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yyk@mail.ru",
+  "license": "ISC"
+}
