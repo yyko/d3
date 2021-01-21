@@ -9,6 +9,7 @@
   "author": "yyk@mail.ru",
   "license": "ISC",
   "dependencies": {
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "underscore": "^1.12.0"
   }
 }

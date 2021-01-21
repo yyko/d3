@@ -1,4 +1,5 @@
 var mysql = require('mysql');
+var _ = require('underscore');
 
 let config1 = {
     host: "localhost",
