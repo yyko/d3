@@ -37,8 +37,7 @@ _.range(0, 3).forEach(i=>{
 const R2 = R/2.5
 const N = 5
 
-points = gen_star_points(R, R2, N)
-p = gen_z_path(points)
+p = gen_z_path(gen_star_points(R, R2, N))
 let colWidth = rowHeight*1.2
 
 let star1 =  add_path(rows[0], p)
