@@ -1,7 +1,7 @@
-const vx1 = -100;
-const vy1 = -150;
-const vx2 = 800;
-const vy2 = 500;
+const vx1 = 0;
+const vy1 = 0;
+const vx2 = 1200;
+const vy2 = 600;
 
 var lineGenerator = d3.line();
 
@@ -12,13 +12,9 @@ grad_to_point = (grad)=>{
     return [x, y];
 }
 
-const N = 5;
-const dG = 360/N;
-const R1 = 50;
-const R2 = 20;
-
 
 const tf2 = x=>x.toFixed(2)
+
 const gen_path = (points=>{
     let ls = points.slice(1, points.length).map(p=>"L" + p.map(tf2).join(',')).join('')
     let ms  = "M" + points[0].map(tf2).join(',')
@@ -31,9 +27,7 @@ const gen_z_path = (points=>{
     return ms + ls +  "Z"
 })
 
-const add_path = (main_g, p)=>{
-    console.log(main_g)
-    return main_g.append('g').append('path').attr('d', p)}
+const add_path = (main_g, p)=>{return main_g.append('g').append('path').attr('d', p)}
 
 
 const gen_star_points = function(r1, r2, n) {
@@ -51,7 +45,7 @@ var svg = d3.select("#svgcontainer")
     .append("svg")
     .attr("width", 1200)
     .attr("height", 600)
-    .attr("viewBox", [vx1, vy1, vx2, vy2].join(' '));
+    //.attr("viewBox", [vx1, vy1, vx2, vy2].join(' '));
 
 var main_g = svg.append('g')
     .attr('fill', 'red')
@@ -68,32 +62,41 @@ points = [[0, 1], [0, -1]].map(p=>p.map(x=>x*cross_height))
 let p2 = gen_path(points);
 let cross = p1 + p2
 add_path(main_g, cross).attr('fill', 'red').attr('stroke', 'black').attr("stroke-width", 1)
-let subcanvas = main_g.append('g')
-subcanvas.attr('transform', 'translate (100, 100)')
+let group1 = main_g.append('g')
+group1.attr('transform', 'translate (100, 100)')
+
+let canvas2 = main_g.append('g')
+canvas2.attr('transform', 'translate (50, 200)')
 
 const d_shift = 110;
 let absolute_shift;
 absolute_shift = 0;
 
+//adding  Ж
 points = gen_star_points(54, 22, 5)
 p = gen_z_path(points)
-let star_g = add_path(subcanvas, p)
-star_g
-.attr("transform", 'rotate(-90)')
+let star_g = add_path(group1, p)
+star_g .attr("transform", 'rotate(-90)')
 absolute_shift++;
 
+//adding О
 let cp = [absolute_shift*d_shift, 0]
-subcanvas.append('circle').attr('cx', cp[0]).attr('cy', cp[1]).attr('r', 50)
+group1.append('circle').attr('cx', cp[0]).attr('cy', cp[1]).attr('r', 50)
 absolute_shift++;
 
+//adding П
 let L = 100
 let rp = [-L/2 + absolute_shift*d_shift, -L/2]
-subcanvas.append('rect') .attr('x', rp[0]) .attr('y', rp[1]) .attr('width', L) .attr('height', L)
+group1.append('rect') .attr('x', rp[0]) .attr('y', rp[1]) .attr('width', L) .attr('height', L)
 absolute_shift++;
 
-/*
-let x_shift = 0;
-points = [[L/2, 0], [L, L], [0, L]].map(p=>[p[0] + x_shift, p[1]])
+//adding options
+//optionGroup 1
+points = [[L/2, 0], [L, L], [0, L]].map(p=>[p[0], p[1]])
 p = gen_path(points)
-let ga = add_path(main_g, p)
-*/
+let firstOption = add_path(canvas2, p)
+firstOption.attr('transform', 'translate (0, 0) scale(0.5, 0.5)')
+
+//optionGroup 2
+let secondOption = add_path(canvas2, p)
+secondOption.attr('transform', 'translate (100, 0)')
