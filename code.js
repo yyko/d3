@@ -27,10 +27,18 @@ _.range(0, 3).forEach(i=>{
         x = j*H;y=i*H;
         pathX = "M" + [x, y].join(',') + "L" +  [x, y + H].join(',')
         pathY = "M" + [x, y].join(',') + "L" +  [x + H, y].join(',')
-        let frames = row.append('g')
+        let cell_g = row.append('g')
+            .attr('class', 'cell')
+        let frames;
+        frames = cell_g.append('g')
         frames.append('path').attr('d', pathX).attr('stroke', 'green')
-        frames = row.append('g')
+        frames = cell_g.append('g')
         frames.append('path').attr('d', pathY).attr('stroke', 'green')
+        frames = cell_g.append('g')
+        let startPath = gen_z_path(gen_star_points(20, 9, 5))
+        let trianlgePath
+        frames.append('path').attr('d', startPath)
+        .attr('transform', 'translate(' + (x + R) + ', ' + (y + R) + ') rotate(-90)')
     })
 })
 
