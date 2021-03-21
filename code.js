@@ -1,7 +1,3 @@
-const vx1 = 0;
-const vy1 = 0;
-const vx2 = 1200;
-const vy2 = 600;
 
 var lineGenerator = d3.line();
 
@@ -14,7 +10,6 @@ grad_to_point = (grad)=>{
 
 
 const tf2 = x=>x.toFixed(2)
-
 const gen_path = (points=>{
     let ls = points.slice(1, points.length).map(p=>"L" + p.map(tf2).join(',')).join('')
     let ms  = "M" + points[0].map(tf2).join(',')
@@ -45,7 +40,6 @@ var svg = d3.select("#svgcontainer")
     .append("svg")
     .attr("width", 1200)
     .attr("height", 600)
-    //.attr("viewBox", [vx1, vy1, vx2, vy2].join(' '));
 
 var main_g = svg.append('g')
     .attr('fill', 'red')
@@ -65,8 +59,8 @@ add_path(main_g, cross).attr('fill', 'red').attr('stroke', 'black').attr("stroke
 let group1 = main_g.append('g')
 group1.attr('transform', 'translate (100, 100)')
 
-let canvas2 = main_g.append('g')
-canvas2.attr('transform', 'translate (50, 200)')
+let group2 = main_g.append('g')
+group2.attr('transform', 'translate (50, 200)')
 
 const d_shift = 110;
 let absolute_shift;
@@ -94,9 +88,9 @@ absolute_shift++;
 //optionGroup 1
 points = [[L/2, 0], [L, L], [0, L]].map(p=>[p[0], p[1]])
 p = gen_path(points)
-let firstOption = add_path(canvas2, p)
-firstOption.attr('transform', 'translate (0, 0) scale(0.5, 0.5)')
+let firstOption = add_path(group2, p)
+//firstOption.attr('transform', 'translate (20, 0) scale(5, 0.5)')
 
 //optionGroup 2
-let secondOption = add_path(canvas2, p)
+let secondOption = add_path(group2, p)
 secondOption.attr('transform', 'translate (100, 0)')
