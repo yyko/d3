@@ -42,9 +42,12 @@ const N = 5
 
 points = gen_star_points(R1, R2, N)
 p = gen_z_path(points)
-let star_g = add_path(row1, p)
-let tr = 200;
-star_g .attr("transform", ' translate(100, 0)')
+let star1 = add_path(row1, p)
+let star2 = add_path(row1, p)
+let tr = 'translate(100, 60)'
+let rot = 'rotate(45)'
+star1.attr("transform", [rot, tr].join(' '))
+star2.attr("transform", [tr, rot].join(' ')).attr('fill', 'green')
 absolute_shift++;
 
 //adding О
