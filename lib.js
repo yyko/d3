@@ -1,3 +1,4 @@
+
 var lineGenerator = d3.line();
 
 const grad_to_point = (grad)=>{
@@ -29,7 +30,7 @@ const gen_star_points = function(r1, r2, n) {
     let dr = dG/2;
     let grads = _.range(0, n).map(i=> { return i*dG; })
     let grads2 = grads.map(grad=>grad + dr)
-    let points = grads.map(grad_to_point).map(p=>p.map(x=>x*r1-r1))
-    let points2 = grads2.map(grad_to_point).map(p=>p.map(x=>x*r2-r1))
+    let points = grads.map(grad_to_point).map(p=>p.map(x=>x*r1))
+    let points2 = grads2.map(grad_to_point).map(p=>p.map(x=>x*r2))
     return _.zip(points, points2).reduce((a, b)=>a.concat(b))
 }

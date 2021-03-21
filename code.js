@@ -1,4 +1,4 @@
-const d_shift = 210;
+const K = Math.PI/180;
 
 var svg = d3.select("#svgcontainer")
     .append("svg")
@@ -23,49 +23,41 @@ add_path(main_g, cross).attr('fill', 'red').attr('stroke', 'black').attr("stroke
 //END cross creation
 
 //this could be generated based on data Data Driven Development
-let row1 = main_g.append('g')
-let row2 = main_g.append('g')
-let row3 = main_g.append('g')
-
-row1.attr('transform', 'translate (0, 100)')
-row2.attr('transform', 'translate (0, 200)')
-row3.attr('transform', 'translate (0, 300)')
+const rowHeight = 100;
+const R = rowHeight/2
+let rows = []
+_.range(0, 3).forEach(i=>{
+    let row = main_g.append('g')
+    row.append('path').attr('d', "M0, " +  R + "L400, " + R).attr('stroke', 'green')
+    rows[i] = row.attr('transform', 'translate (0, ' + (R +  i*rowHeight) +')')
+})
 
 //START adding letters
-let absolute_shift;
-absolute_shift = 0;
-
 //adding  Ж
-const R1 = 54
-const R2 = 22
+const R2 = R/2.5
 const N = 5
 
-points = gen_star_points(R1, R2, N)
+points = gen_star_points(R, R2, N)
 p = gen_z_path(points)
-let tr = 'translate(100, 60)'
-let stars = [];
-_.range(-10, 10).forEach((i)=>{
-    let rot = 'rotate(' + 10*i + ')'
-    let star = add_path(row1, p).attr("transform", [rot, tr].join(' '))
-    stars.push(star)
-})
-let rot = 'rotate(40)'
-absolute_shift++;
+let colWidth = rowHeight*1.2
+
+let star1 =  add_path(rows[0], p)
+    //best transformation to move topleft coner as ancor point of the star
+    .attr('transform', 'translate(' + (R + 5) + ',5) rotate(270) scale(1.1, 1.1)')
 
 //adding О
-let cp = [absolute_shift*d_shift, 0]
-row1.append('circle').attr('cx', cp[0]).attr('cy', cp[1]).attr('r', 50)
-absolute_shift++;
+rows[0].append('circle').attr('cx', 0).attr('cy', 0).attr('r', R)
+.attr('transform', 'translate(' + (colWidth + R) + ', 0)')
 
 //adding П
-let L = 100
-let rp = [-L/2 + absolute_shift*d_shift, -L/2]
-row1.append('rect') .attr('x', rp[0]) .attr('y', rp[1]) .attr('width', L) .attr('height', L)
-absolute_shift++;
+L = rowHeight
+rows[0].append('rect') .attr('x', 0) .attr('y', 0) .attr('width', L) .attr('height', L)
+.attr('transform', 'translate(' + 2*colWidth + ', ' + -R + ')')
 //END adding letters
 
 //adding options - two rows for now
 //optionGroup 1
+L = rowHeight/2
 points = [[L/2, 0], [L, L], [0, L]].map(p=>[p[0], p[1]])//triagnle
 p = gen_path(points)
 //add_path(row2, p) .attr('transform', 'translate (0, 0) scale(0.5, 0.5)')
@@ -75,7 +67,7 @@ p = gen_path(points)
 //secondOption.attr('transform', 'translate (100, 0)')
 
 //optionGroup 3
-let thirdOption = add_path(row2, p)
+let thirdOption = add_path(rows[1], p)
 //secondOption.attr('transform', ' translate (50, 0)')
 
-//let secondOptionRow = add_path(row3, p)
+let secondOptionRow = add_path(rows[2], p)
