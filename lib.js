@@ -1,4 +1,4 @@
-const vx1 = -20; const vy1 = -20; const vx2 = 1000; const vy2 = 500;
+const vx1 = -50; const vy1 = -50; const vx2 = 1000; const vy2 = 500;
 
 const H = 150; const R = H / 2; const CR = R / 2
 
@@ -11,7 +11,6 @@ const arcFactory = (...args) => (i) => (g) => {
     let path = "M 0 0 A " + r + " " + r + ", 0, 0, 1, " + 2 * dx + " 0"
     path += ["L", dx, dy / 2].join(' ') + "Z"
     args.forEach((arg, i)=>{
-        console.log(arg)
         if (arg) {
             g.append('path').attr('d', path)
             .attr('transform', trs_args + 'rotate(' + i*90  + ' ' + dx + ' ' + dy + ')')
@@ -21,7 +20,8 @@ const arcFactory = (...args) => (i) => (g) => {
     return g;
  }
 
-const arc = (i) => (g) => {
+const arc = (spin) => (i) => (g) => {
+    let rotation_step = 90;
     let alfa = 10;
     let r = CR
     let dy = r * Math.cos(alfa * K)
@@ -37,10 +37,8 @@ const arc = (i) => (g) => {
     g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(180 ' + dx + ' ' + dy + ')')
         .attr('fill', 'none').attr('stroke', 'black')
     return g
-        .attr('transform', 'rotate(' + i * 90 + ')')
+        .attr('transform', 'rotate(' + spin * i * rotation_step + ')')
 }
-
-
 
 const circle1 = (i) => (g) => {
     let trs_args = tr([R / 2, R / 2])
@@ -52,7 +50,9 @@ const circle1 = (i) => (g) => {
         .attr('stroke', 'black')
         .attr('transform', trs_args)
 }
-const rect1 = (i) => (g) => {
+const rect1 = (spin) => (i) => (g) => {
+    let rotation_step = 90;
+    let alfa = 10;
     let h = R
     let d = h / 5
     g.append('rect')
@@ -65,8 +65,8 @@ const rect1 = (i) => (g) => {
 
     rct(h - d, 0, d, d)(g).attr('fill', 'none').attr('stroke', 'black')
     rct(0, h - d, d, d)(g)
-    g.attr('transform', 'rotate(' + i * 90 + ', ' + h / 2 + ', ' + h / 2 + ')')
-    return g;
+    g.attr('transform', 'rotate(' + spin * i * rotation_step  + ', ' + h / 2 + ', ' + h / 2 + ')')
+    return g
 
 
 }
