@@ -1,6 +1,6 @@
 const doubleArc = arcFactory("black", null, 'green', null);
 let content = [
-    [step([circle1], 0), step([doubleArc], 0), step([rect1], 2)],
+    [step([doubleArc, circle1], 0), step([circle1], 0), step([rect1], 2)],
     [step([rect1], 3), step([arc2],0), step([arc], 0)],
     [step([circle1, arc], 0), step([arc], 0), step([arc3, rect1], 1)],
 ]
