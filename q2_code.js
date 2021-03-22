@@ -11,14 +11,8 @@ var svg = d3.select("#svgcontainer")
     .attr("viewBox", [vx1, vy1, vx2, vy2].join(' '))
 
 var main_g = svg.append('g')
-    .attr('fill', 'blue')
-    .attr('stroke', 'none')
-    .attr("stroke-width", 1)
-//this could be generated based on data Data Driven Development
-const rowHeight = 90;
 const H = 80
 const R = H/2
-let rows = []
 _.range(0, 3).forEach(i=>{
     let row = main_g.append('g')
     .attr('class', 'row')
@@ -28,11 +22,8 @@ _.range(0, 3).forEach(i=>{
         x = j*H;y=i*H;
         pathX = "M" + [x, y].join(',') + "L" +  [x, y + H].join(',')
         pathY = "M" + [x, y].join(',') + "L" +  [x + H, y].join(',')
-        let cell_g = row.append('g')
-            .attr('class', 'cell')
-        let frames;
-
-        frames = cell_g.append('g')
+        let cell_g = row.append('g').attr('class', 'cell')
+        let frames = cell_g.append('g')
         let gx = fn(frames)
         let trs = gx.attr('transform');
         if (trs) {

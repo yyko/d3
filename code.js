@@ -1,7 +1,3 @@
-const vx1 = -20;
-const vy1 = -20;
-const vx2 = 1000;
-const vy2 = 500;
 let content = [
     [star, circle, rect],
     [triangle_norm, rect, triangle_big],
