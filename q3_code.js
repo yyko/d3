@@ -1,19 +1,20 @@
 const H = 80
 const R = H/2
 const CR = R/2
+
 const arc = (i) => (g) => {
-    let alfa = 80;
+    let alfa = 10;
     let r = CR
     let dy = r * Math.cos(alfa*K)
     let dx = r * Math.sin(alfa*K)
-    let trs_args = tr([r/2,  r - dy])
+    let trs_args = tr([r - dx,  r - dy])
     let path = "M 0 0 A " + r + " " + r + ", 0, 0, 1, " + 2*dx + " 0"
     path+= ["L", dx, dy/2].join(' ')
     path+="Z"
     g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(0 ' + dx + ' ' + dy + ')')
-    //g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(90 ' + dx + ' ' + dy + ')')
-    //g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(-90 ' + dx + ' ' + dy + ')')
-    //g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(180 ' + dx + ' ' + dy + ')')
+    g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(90 ' + dx + ' ' + dy + ')')
+    g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(-90 ' + dx + ' ' + dy + ')')
+    g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(180 ' + dx + ' ' + dy + ')')
     return g
 }
 const circle1 = (i) => (g) => {
@@ -47,11 +48,13 @@ const rect1 = (i) => (g) => {
 
 }
 const step = (xs, i) => (g) =>{
-    xs[0](i)(g)
+    xs.forEach(fn=>{
+    fn(i)(g)
+    })
     return g;
 }
 let content = [
-    [step([circle1], 0), step([rect1], 1), step([rect1], 2)],
+    [step([circle1, arc], 0), step([rect1], 1), step([rect1], 2)],
     [step([rect1], 3), arc(8), encripted(6)],
     [encripted(7), encripted(4), encripted(9)],
 ]
