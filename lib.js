@@ -2,7 +2,7 @@ const vx1 = -20; const vy1 = -20; const vx2 = 1000; const vy2 = 500;
 
 const H = 150; const R = H / 2; const CR = R / 2
 
-const arcFactory = (c1, c2, c3, c4) => {
+const arcFactory = (c1, c2, c3, c4) => (i) => (g) => {
     let alfa = 10;
     let r = CR
     let dy = r * Math.cos(alfa * K)
@@ -19,16 +19,15 @@ const arcFactory = (c1, c2, c3, c4) => {
             .attr('fill', c2).attr('stroke', 'none')
     }
     if (c3) {
-        g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(90 ' + dx + ' ' + dy + ')')
+        g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(180 ' + dx + ' ' + dy + ')')
             .attr('fill', c3).attr('stroke', 'none')
     }
     if (c4) {
-        g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(90 ' + dx + ' ' + dy + ')')
+        g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(270 ' + dx + ' ' + dy + ')')
             .attr('fill', c4).attr('stroke', 'none')
     }
-    return g
-        .attr('transform', 'rotate(' + i * 90 + ')')
-}
+    return g;
+ }
 
 const arc = (i) => (g) => {
     let alfa = 10;
