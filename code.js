@@ -3,9 +3,10 @@ const vx1 = -20;
 const vy1 = -20;
 const vx2 = 1000;
 const vy2 = 500;
+const tr = (p)=>'translate(' + p.join(', ') + ')'
 //::SvgGroup->SvgGroup
 const star = (g)=>{
-    let starPath = gen_z_path(gen_star_points(50, 9, 5))
+    let starPath = gen_z_path(gen_star_points(50, 25, 5))
     return g.append('path')
         .attr('d', starPath)
         .attr('transform', 'rotate(-90)')
@@ -23,13 +24,49 @@ const rect = (g)=>{
         .attr('width', 100)
         .attr('height', 100)
 }
-const triangle_norm = ()=>console.log('triangle norm')
-const triangle_small = ()=>console.log('triangle small')
-const triangle_big = ()=>console.log('triangle big')
+const triangle_norm = (g)=>{
+    let points;
+    let L = 50
+    let hL = L/2
+    points = [[hL, 0], [L, L], [0, L]].map(p=>[p[0], p[1]])//triagnl
+    let trianglePath = gen_z_path(points)
+    console.log(tr([-hL, -hL]))
+    return g.append('path')
+        .attr('d', trianglePath)
+        .attr('transform', tr([-hL, -hL]))
+}
+
+const triangle_small = (g)=>{
+    let points;
+    let L = 50
+    let hL = L/2
+    points = [[hL, 0], [L, L], [0, L]].map(p=>[p[0], p[1]])//triagnl
+    let trianglePath = gen_z_path(points)
+    let transformations
+    transformations = 'scale(0.5, 0.5)'
+    transformations += tr([-hL, -hL])
+    return g.append('path')
+        .attr('d', trianglePath)
+        .attr('transform', transformations)
+}
+
+const triangle_big = (g)=>{
+    let points;
+    let L = 50
+    let hL = L/2
+    points = [[hL, 0], [L, L], [0, L]].map(p=>[p[0], p[1]])//triagnl
+    let trianglePath = gen_z_path(points)
+    let transformations
+    transformations = 'scale(1.5, 1.5)'
+    transformations += tr([-hL, -hL])
+    return g.append('path')
+        .attr('d', trianglePath)
+        .attr('transform', transformations)
+}
 let content = [
     [star, circle, rect],
-    [star, star, star],
-    [star, circle, rect],
+    [triangle_norm, triangle_small, triangle_big],
+    [star, rect, circle],
 ]
 /*let content = [
     [star, circle, rect],
