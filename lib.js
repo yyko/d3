@@ -1,7 +1,90 @@
-const vx1 = -20;
-const vy1 = -20;
-const vx2 = 1000;
-const vy2 = 500;
+const vx1 = -20; const vy1 = -20; const vx2 = 1000; const vy2 = 500;
+
+const H = 80
+const R = H/2
+const CR = R/2
+
+const circle1 = (i) => (g) => {
+    let trs_args = tr([R/2,  R/2])
+    g.append('circle')
+        .attr('cx', 0)
+        .attr('cy', 0)
+        .attr('r', CR)
+        .attr('fill', 'none')
+        .attr('stroke', 'black')
+        .attr('transform', trs_args)
+}
+const rect1 = (i) => (g) => {
+    let h = R
+    let d = h/5
+    g.append('rect')
+        .attr('x', 0)
+        .attr('y', 0)
+        .attr('width', h)
+        .attr('height', h)
+        .attr('fill', 'none')
+        .attr('stroke', 'black')
+
+    rct(h-d, 0, d, d)(g).attr('fill', 'none') .attr('stroke', 'black')
+    rct(0, h-d, d, d)(g)
+    g.attr('transform', 'rotate(' + i*90 + ', ' + h/2 + ', ' + h/2 + ')')
+    return g;
+
+
+}
+const step = (xs, i) => (g) =>{
+    xs.forEach(fn=>{
+    fn(i)(g)
+    })
+    return g;
+}
+const arc2 = (i) => (g) => {
+    let alfa = 10;
+    let r = CR
+    let dy = r * Math.cos(alfa*K)
+    let dx = r * Math.sin(alfa*K)
+    let trs_args = tr([r - dx,  r - dy])
+    let path = "M 0 0 A " + r + " " + r + ", 0, 0, 1, " + 2*dx + " 0"
+    path+= ["L", dx, dy/2].join(' ')
+    path+="Z"
+    g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(0 ' + dx + ' ' + dy + ')')
+    .attr('fill', 'none').attr('stroke','black')
+    g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(-90 ' + dx + ' ' + dy + ')')
+    return g
+}
+
+
+const arc3 = (i) => (g) => {
+    let alfa = 10;
+    let r = CR
+    let dy = r * Math.cos(alfa*K)
+    let dx = r * Math.sin(alfa*K)
+    let trs_args = tr([r - dx,  r - dy])
+    let path = "M 0 0 A " + r + " " + r + ", 0, 0, 1, " + 2*dx + " 0"
+    path+= ["L", dx, dy/2].join(' ')
+    path+="Z"
+    g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(0 ' + dx + ' ' + dy + ')')
+    .attr('fill', 'none').attr('stroke','black')
+    return g
+}
+
+const arc = (i) => (g) => {
+    let alfa = 10;
+    let r = CR
+    let dy = r * Math.cos(alfa*K)
+    let dx = r * Math.sin(alfa*K)
+    let trs_args = tr([r - dx,  r - dy])
+    let path = "M 0 0 A " + r + " " + r + ", 0, 0, 1, " + 2*dx + " 0"
+    path+= ["L", dx, dy/2].join(' ')
+    path+="Z"
+    g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(0 ' + dx + ' ' + dy + ')')
+    .attr('fill', 'none').attr('stroke','black')
+    g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(90 ' + dx + ' ' + dy + ')')
+    g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(-90 ' + dx + ' ' + dy + ')')
+    g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(180 ' + dx + ' ' + dy + ')')
+    .attr('fill', 'none').attr('stroke','black')
+    return g
+        .attr('transform', 'rotate(' + i*90 + ')') }
 
 const rct =(x, y, w, h) => (g)=>{
     return g.append('rect')
