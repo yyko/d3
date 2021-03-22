@@ -65,15 +65,10 @@ const triangle_big = (g)=>{
 }
 let content = [
     [star, circle, rect],
-    [triangle_norm, triangle_small, triangle_big],
-    [star, rect, circle],
+    [triangle_norm, rect, triangle_big],
+    [star, triangle_small, circle],
 ]
-/*let content = [
-    [star, circle, rect],
-    [triangle_norm, triangle_small, triangle_big],
-    [star, circle,rect],
-]
-*/
+
 var svg = d3.select("#svgcontainer")
     .append("svg")
     .attr("width", 1200)
