@@ -3,6 +3,14 @@ const vy1 = -20;
 const vx2 = 1000;
 const vy2 = 500;
 
+const rct =(x, y, w, h) => (g)=>{
+    return g.append('rect')
+        .attr('x', x)
+        .attr('y', y)
+        .attr('width', w)
+        .attr('height', h)
+}
+
 const encripted = (n)=> (g) => {
     let h = 20; let w = 15
     let ps = {
