@@ -8,12 +8,13 @@ const comb = (...args) => (g) => {
 let a1 = comb(arc(1)(0), rect1(1)(0))
 let a2 = comb(arc(1)(1), rect1(1)(1))
 let a3 = comb(arc(1)(2), rect1(1)(2))
-let b1 = comb(arc(1)(3), rect1(1)(3))
+let b1 = comb(arc(1)(0))
 let b2 = comb(arc(1)(4), rect1(1)(4))
 let b3 = comb(arc(-1)(0), rect1(1)(5))
-let c1 = comb(rect1(1)(0), rect1(1)(1))
-let c2 = comb(arc(1)(0))
+let c1 = comb(arc(1)(3), rect1(1)(3))//right answer
+let c2 = comb(rect1(1)(0), rect1(1)(1))
 let c3 = comb(arc(1)(1))
+
 let content = [
     [a1, a2, a3],
     [b1, b2, b3],
