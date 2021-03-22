@@ -21,8 +21,6 @@ const arcFactory = (...args) => (i) => (g) => {
  }
 
 const arc = (spin) => (i) => (g) => {
-    console.log('spin: ' + spin)
-    console.log('step: ' + i)
     let rotation_step = 90;
     let angle = spin * i * rotation_step
     let alfa = 10;

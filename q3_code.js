@@ -5,13 +5,19 @@ const comb = (...args) => (g) => {
     })
     return g
 }
-let a1 = comb(arc(1)(0), arc(1)(1), arc(1)(2))
-let a2 = comb(rect1(1)(0), rect1(1)(1))
-let a3 = comb(rect1(1)(2), rect1(1)(3))
+let a1 = comb(arc(1)(0), rect1(1)(0))
+let a2 = comb(arc(1)(1), rect1(1)(1))
+let a3 = comb(arc(1)(2), rect1(1)(2))
+let b1 = comb(arc(1)(3), rect1(1)(3))
+let b2 = comb(arc(1)(4), rect1(1)(4))
+let b3 = comb(arc(-1)(0), rect1(1)(5))
+let c1 = comb(rect1(1)(0), rect1(1)(1))
+let c2 = comb(arc(1)(0))
+let c3 = comb(arc(1)(1))
 let content = [
     [a1, a2, a3],
-    [rect1(1)(1), rect1(1)(1), rect1(1)(1)],
-    [rect1(1)(1), rect1(1)(1), rect1(1)(1)],
+    [b1, b2, b3],
+    [c1, c2, c3],
 ]
 
 var svg = d3.select("#svgcontainer")
