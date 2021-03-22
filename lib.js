@@ -1,4 +1,50 @@
+const vx1 = -20;
+const vy1 = -20;
+const vx2 = 1000;
+const vy2 = 500;
 
+const encripted = (n)=> (g) => {
+    let h = 20; let w = 15
+    let ps = {
+        a:[0, 0],   b:[w, 0],
+        c:[0, h],   d:[w, h],
+        e:[0, 2*h], f:[w, 2*h]};
+    let digits = {
+        0: [0, 6, 5, 4, 8, 7],
+        1: [1, 5, 6],
+        2: [0, 6, 3, 4],
+        3: [0, 1, 2, 3],
+        4: [7, 2, 6, 5],
+        5: [0, 7, 2, 5, 4],
+        6: [0, 7, 2, 5, 4, 8],
+        7: [0, 1, 8],
+        8: [0, 6, 5, 4, 8, 7, 2],
+        9: [0, 6, 2, 7, 3],
+    }
+    let paths = [];
+    paths[0] = gen_path([ps['a'], ps['b']])
+    paths[1] = gen_path([ps['c'], ps['b']])
+    paths[2] = gen_path([ps['c'], ps['d']])
+    paths[3] = gen_path([ps['e'], ps['d']])
+    paths[4] = gen_path([ps['e'], ps['f']])
+    paths[5] = gen_path([ps['d'], ps['f']])
+    paths[6] = gen_path([ps['b'], ps['d']])
+    paths[7] = gen_path([ps['a'], ps['c']])
+    paths[8] = gen_path([ps['c'], ps['e']])
+    let bars = digits[n]
+    let resPath = bars.map(idx=>paths[idx]).join('')
+    let gr = g.append('g')
+    gr.append('path')
+        .attr('d', resPath)
+        .attr('stroke', 'black')
+        .attr('transform', 'scale(-1, 1) ' + tr([-2*w, 0]))
+    gr.append('path')
+        .attr('d', resPath)
+        .attr('stroke', 'black')
+    return gr;
+}
+
+const K = Math.PI/180;
 const tr = (p)=>'translate(' + p.join(', ') + ')'
 //::SvgGroup->SvgGroup
 const star = (g)=>{

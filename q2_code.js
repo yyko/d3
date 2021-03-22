@@ -1,12 +1,7 @@
-const K = Math.PI/180;
-const vx1 = -20;
-const vy1 = -20;
-const vx2 = 1000;
-const vy2 = 500;
 let content = [
-    [star, circle, rect],
-    [triangle_norm, rect, triangle_big],
-    [star, triangle_small, circle],
+    [encripted(1), encripted(2), encripted(3)],
+    [encripted(5), encripted(8), encripted(6)],
+    [encripted(7), encripted(4), encripted(9)],
 ]
 
 var svg = d3.select("#svgcontainer")
@@ -16,12 +11,12 @@ var svg = d3.select("#svgcontainer")
     .attr("viewBox", [vx1, vy1, vx2, vy2].join(' '))
 
 var main_g = svg.append('g')
-    .attr('fill', 'red')
+    .attr('fill', 'blue')
     .attr('stroke', 'none')
     .attr("stroke-width", 1)
 //this could be generated based on data Data Driven Development
-const rowHeight = 100;
-const H = 110
+const rowHeight = 90;
+const H = 80
 const R = H/2
 let rows = []
 _.range(0, 3).forEach(i=>{
@@ -41,9 +36,9 @@ _.range(0, 3).forEach(i=>{
         let gx = fn(frames)
         let trs = gx.attr('transform');
         if (trs) {
-            gx.attr('transform', ' translate(' +[x+R, y+R].join(',')  + ')' + trs)
+            gx.attr('transform', ' translate(' +[x, y].join(',')  + ')' + trs)
         } else {
-            gx.attr('transform', ' translate(' +[x+R, y+R].join(',')  + ')')
+            gx.attr('transform', ' translate(' +[x, y].join(',')  + ')')
         }
     })
 })

@@ -1,4 +1,3 @@
-const K = Math.PI/180;
 const vx1 = -20;
 const vy1 = -20;
 const vx2 = 1000;
