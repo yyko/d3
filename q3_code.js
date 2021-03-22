@@ -1,13 +1,30 @@
 const H = 80
 const R = H/2
 const CR = R/2
+const arc = (i) => (g) => {
+    let alfa = 80;
+    let r = CR
+    let dy = r * Math.cos(alfa*K)
+    let dx = r * Math.sin(alfa*K)
+    let trs_args = tr([r/2,  r - dy])
+    let path = "M 0 0 A " + r + " " + r + ", 0, 0, 1, " + 2*dx + " 0"
+    path+= ["L", dx, dy/2].join(' ')
+    path+="Z"
+    g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(0 ' + dx + ' ' + dy + ')')
+    //g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(90 ' + dx + ' ' + dy + ')')
+    //g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(-90 ' + dx + ' ' + dy + ')')
+    //g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(180 ' + dx + ' ' + dy + ')')
+    return g
+}
 const circle1 = (i) => (g) => {
+    let trs_args = tr([R/2,  R/2])
     g.append('circle')
         .attr('cx', 0)
         .attr('cy', 0)
         .attr('r', CR)
         .attr('fill', 'none')
         .attr('stroke', 'black')
+        .attr('transform', trs_args)
 }
 const rect1 = (i) => (g) => {
     let h = R
@@ -35,7 +52,7 @@ const step = (xs, i) => (g) =>{
 }
 let content = [
     [step([circle1], 0), step([rect1], 1), step([rect1], 2)],
-    [step([rect1], 3), encripted(8), encripted(6)],
+    [step([rect1], 3), arc(8), encripted(6)],
     [encripted(7), encripted(4), encripted(9)],
 ]
 
@@ -61,7 +78,8 @@ _.range(0, 3).forEach(i=>{
         let frames = cell_g.append('g')
         let gx = fn(frames)
         let trs = gx.attr('transform');
-        let trs_args = tr([x + R/2,  y + R/2])
+        //let trs_args = tr([x + R/2,  y + R/2])
+        let trs_args = tr([x,  y])
         if (trs){ trs_args+= trs}
         gx.attr('transform', trs_args)
     })
