@@ -1,8 +1,34 @@
 const vx1 = -20; const vy1 = -20; const vx2 = 1000; const vy2 = 500;
 
-const H = 80
-const R = H / 2
-const CR = R / 2
+const H = 150; const R = H / 2; const CR = R / 2
+
+const arcFactory = (c1, c2, c3, c4) => {
+    let alfa = 10;
+    let r = CR
+    let dy = r * Math.cos(alfa * K)
+    let dx = r * Math.sin(alfa * K)
+    let trs_args = tr([r - dx, r - dy])
+    let path = "M 0 0 A " + r + " " + r + ", 0, 0, 1, " + 2 * dx + " 0"
+    path += ["L", dx, dy / 2].join(' ') + "Z"
+    if (c1) {
+        g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(0 ' + dx + ' ' + dy + ')')
+            .attr('fill', c1).attr('stroke', 'none')
+    }
+    if (c2) {
+        g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(90 ' + dx + ' ' + dy + ')')
+            .attr('fill', c2).attr('stroke', 'none')
+    }
+    if (c3) {
+        g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(90 ' + dx + ' ' + dy + ')')
+            .attr('fill', c3).attr('stroke', 'none')
+    }
+    if (c4) {
+        g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(90 ' + dx + ' ' + dy + ')')
+            .attr('fill', c4).attr('stroke', 'none')
+    }
+    return g
+        .attr('transform', 'rotate(' + i * 90 + ')')
+}
 
 const arc = (i) => (g) => {
     let alfa = 10;

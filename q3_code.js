@@ -1,5 +1,5 @@
 let content = [
-    [step([circle1, arc2], 0), step([rect1], 1), step([rect1], 2)],
+    [step([circle1], 0), step([rect1], 1), step([rect1], 2)],
     [step([rect1], 3), step([arc2],0), step([arc], 0)],
     [step([circle1, arc], 0), step([arc], 0), step([arc3, rect1], 1)],
 ]
