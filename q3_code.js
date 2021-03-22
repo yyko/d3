@@ -55,8 +55,8 @@ const step = (xs, i) => (g) =>{
 }
 let content = [
     [step([circle1, arc], 0), step([rect1], 1), step([rect1], 2)],
-    [step([rect1], 3), arc(8), encripted(6)],
-    [encripted(7), encripted(4), encripted(9)],
+    [step([rect1], 3), step([arc],0), step([arc], 0)],
+    [step([arc], 0), step([arc], 0), step([arc, rect1], 0)],
 ]
 
 var svg = d3.select("#svgcontainer")
