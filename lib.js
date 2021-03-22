@@ -41,7 +41,8 @@ const arc = (spin) => (i) => (g) => {
     gr.append('path').attr('d', path).attr('transform', trs_args + 'rotate(180 ' + dx + ' ' + dy + ')')
         .attr('fill', 'none').attr('stroke', 'black')
     return gr
-        .attr('transform', 'rotate(' + angle + ')')
+        //.attr('transform', 'rotate(' + angle + ')')
+        .attr('transform', 'rotate(' + angle + ', ' + CR + ', ' + CR + ')')
 }
 
 const circle1 = (i) => (g) => {
@@ -54,12 +55,14 @@ const circle1 = (i) => (g) => {
         .attr('stroke', 'black')
         .attr('transform', trs_args)
 }
+
 const rect1 = (spin) => (i) => (g) => {
     let rotation_step = 90;
     let alfa = 10;
     let h = R
     let d = h / 5
-    g.append('rect')
+    let gr = g.append('g')
+    gr.append('rect')
         .attr('x', 0)
         .attr('y', 0)
         .attr('width', h)
@@ -67,9 +70,9 @@ const rect1 = (spin) => (i) => (g) => {
         .attr('fill', 'none')
         .attr('stroke', 'black')
 
-    rct(h - d, 0, d, d)(g).attr('fill', 'none').attr('stroke', 'black')
-    rct(0, h - d, d, d)(g)
-    g.attr('transform', 'rotate(' + spin * i * rotation_step  + ', ' + h / 2 + ', ' + h / 2 + ')')
+    rct(h - d, 0, d, d)(gr).attr('fill', 'none').attr('stroke', 'black')
+    rct(0, h - d, d, d)(gr)
+    gr.attr('transform', 'rotate(' + spin * i * rotation_step  + ', ' + h / 2 + ', ' + h / 2 + ')')
     return g
 
 

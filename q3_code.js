@@ -1,13 +1,15 @@
 const doubleArc = arcFactory("black", null, 'green', null);
-const fire = (...args) => (g) => {
+const comb = (...args) => (g) => {
     args.forEach(arg=>{
       arg(g);
     })
     return g
 }
-let a1 = fire(arc(1)(1), arc(-1)(1))
+let a1 = comb(arc(1)(0), arc(1)(1), arc(1)(2))
+let a2 = comb(rect1(1)(0), rect1(1)(1))
+let a3 = comb(rect1(1)(2), rect1(1)(3))
 let content = [
-    [a1, rect1(-1)(0), rect1(1)(1)],
+    [a1, a2, a3],
     [rect1(1)(1), rect1(1)(1), rect1(1)(1)],
     [rect1(1)(1), rect1(1)(1), rect1(1)(1)],
 ]
