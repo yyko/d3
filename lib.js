@@ -1,11 +1,32 @@
 const vx1 = -20; const vy1 = -20; const vx2 = 1000; const vy2 = 500;
 
 const H = 80
-const R = H/2
-const CR = R/2
+const R = H / 2
+const CR = R / 2
+
+const arc = (i) => (g) => {
+    let alfa = 10;
+    let r = CR
+    let dy = r * Math.cos(alfa * K)
+    let dx = r * Math.sin(alfa * K)
+    let trs_args = tr([r - dx, r - dy])
+    let path = "M 0 0 A " + r + " " + r + ", 0, 0, 1, " + 2 * dx + " 0"
+    path += ["L", dx, dy / 2].join(' ')
+    path += "Z"
+    g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(0 ' + dx + ' ' + dy + ')')
+        .attr('fill', 'none').attr('stroke', 'black')
+    g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(90 ' + dx + ' ' + dy + ')')
+    g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(-90 ' + dx + ' ' + dy + ')')
+    g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(180 ' + dx + ' ' + dy + ')')
+        .attr('fill', 'none').attr('stroke', 'black')
+    return g
+        .attr('transform', 'rotate(' + i * 90 + ')')
+}
+
+
 
 const circle1 = (i) => (g) => {
-    let trs_args = tr([R/2,  R/2])
+    let trs_args = tr([R / 2, R / 2])
     g.append('circle')
         .attr('cx', 0)
         .attr('cy', 0)
@@ -16,7 +37,7 @@ const circle1 = (i) => (g) => {
 }
 const rect1 = (i) => (g) => {
     let h = R
-    let d = h/5
+    let d = h / 5
     g.append('rect')
         .attr('x', 0)
         .attr('y', 0)
@@ -25,31 +46,31 @@ const rect1 = (i) => (g) => {
         .attr('fill', 'none')
         .attr('stroke', 'black')
 
-    rct(h-d, 0, d, d)(g).attr('fill', 'none') .attr('stroke', 'black')
-    rct(0, h-d, d, d)(g)
-    g.attr('transform', 'rotate(' + i*90 + ', ' + h/2 + ', ' + h/2 + ')')
+    rct(h - d, 0, d, d)(g).attr('fill', 'none').attr('stroke', 'black')
+    rct(0, h - d, d, d)(g)
+    g.attr('transform', 'rotate(' + i * 90 + ', ' + h / 2 + ', ' + h / 2 + ')')
     return g;
 
 
 }
-const step = (xs, i) => (g) =>{
-    xs.forEach(fn=>{
-    fn(i)(g)
+const step = (xs, i) => (g) => {
+    xs.forEach(fn => {
+        fn(i)(g)
     })
     return g;
 }
 const arc2 = (i) => (g) => {
     let alfa = 10;
     let r = CR
-    let dy = r * Math.cos(alfa*K)
-    let dx = r * Math.sin(alfa*K)
-    let trs_args = tr([r - dx,  r - dy])
-    let path = "M 0 0 A " + r + " " + r + ", 0, 0, 1, " + 2*dx + " 0"
-    path+= ["L", dx, dy/2].join(' ')
-    path+="Z"
-    g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(0 ' + dx + ' ' + dy + ')')
-    .attr('fill', 'none').attr('stroke','black')
-    g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(-90 ' + dx + ' ' + dy + ')')
+    let dy = r * Math.cos(alfa * K)
+    let dx = r * Math.sin(alfa * K)
+    let trs_args = tr([r - dx, r - dy])
+    let path = "M 0 0 A " + r + " " + r + ", 0, 0, 1, " + 2 * dx + " 0"
+    path += ["L", dx, dy / 2].join(' ')
+    path += "Z"
+    g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(0 ' + dx + ' ' + dy + ')')
+        .attr('fill', 'none').attr('stroke', 'black')
+    g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(-90 ' + dx + ' ' + dy + ')')
     return g
 }
 
@@ -57,36 +78,19 @@ const arc2 = (i) => (g) => {
 const arc3 = (i) => (g) => {
     let alfa = 10;
     let r = CR
-    let dy = r * Math.cos(alfa*K)
-    let dx = r * Math.sin(alfa*K)
-    let trs_args = tr([r - dx,  r - dy])
-    let path = "M 0 0 A " + r + " " + r + ", 0, 0, 1, " + 2*dx + " 0"
-    path+= ["L", dx, dy/2].join(' ')
-    path+="Z"
-    g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(0 ' + dx + ' ' + dy + ')')
-    .attr('fill', 'none').attr('stroke','black')
+    let dy = r * Math.cos(alfa * K)
+    let dx = r * Math.sin(alfa * K)
+    let trs_args = tr([r - dx, r - dy])
+    let path = "M 0 0 A " + r + " " + r + ", 0, 0, 1, " + 2 * dx + " 0"
+    path += ["L", dx, dy / 2].join(' ')
+    path += "Z"
+    g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(0 ' + dx + ' ' + dy + ')')
+        .attr('fill', 'none').attr('stroke', 'black')
     return g
 }
 
-const arc = (i) => (g) => {
-    let alfa = 10;
-    let r = CR
-    let dy = r * Math.cos(alfa*K)
-    let dx = r * Math.sin(alfa*K)
-    let trs_args = tr([r - dx,  r - dy])
-    let path = "M 0 0 A " + r + " " + r + ", 0, 0, 1, " + 2*dx + " 0"
-    path+= ["L", dx, dy/2].join(' ')
-    path+="Z"
-    g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(0 ' + dx + ' ' + dy + ')')
-    .attr('fill', 'none').attr('stroke','black')
-    g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(90 ' + dx + ' ' + dy + ')')
-    g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(-90 ' + dx + ' ' + dy + ')')
-    g.append('path') .attr('d', path) .attr('transform', trs_args + 'rotate(180 ' + dx + ' ' + dy + ')')
-    .attr('fill', 'none').attr('stroke','black')
-    return g
-        .attr('transform', 'rotate(' + i*90 + ')') }
 
-const rct =(x, y, w, h) => (g)=>{
+const rct = (x, y, w, h) => (g) => {
     return g.append('rect')
         .attr('x', x)
         .attr('y', y)
@@ -94,12 +98,13 @@ const rct =(x, y, w, h) => (g)=>{
         .attr('height', h)
 }
 
-const encripted = (n)=> (g) => {
+const encripted = (n) => (g) => {
     let h = 20; let w = 15
     let ps = {
-        a:[0, 0],   b:[w, 0],
-        c:[0, h],   d:[w, h],
-        e:[0, 2*h], f:[w, 2*h]};
+        a: [0, 0], b: [w, 0],
+        c: [0, h], d: [w, h],
+        e: [0, 2 * h], f: [w, 2 * h]
+    };
     let digits = {
         0: [0, 6, 5, 4, 8, 7],
         1: [1, 5, 6],
@@ -123,56 +128,56 @@ const encripted = (n)=> (g) => {
     paths[7] = gen_path([ps['a'], ps['c']])
     paths[8] = gen_path([ps['c'], ps['e']])
     let bars = digits[n]
-    let resPath = bars.map(idx=>paths[idx]).join('')
+    let resPath = bars.map(idx => paths[idx]).join('')
     let gr = g.append('g')
     gr.append('path')
         .attr('d', resPath)
         .attr('stroke', 'black')
-        .attr('transform', 'scale(-1, 1) ' + tr([-2*w, 0]))
+        .attr('transform', 'scale(-1, 1) ' + tr([-2 * w, 0]))
     gr.append('path')
         .attr('d', resPath)
         .attr('stroke', 'black')
     return gr;
 }
 
-const K = Math.PI/180;
-const tr = (p)=>'translate(' + p.join(', ') + ')'
+const K = Math.PI / 180;
+const tr = (p) => 'translate(' + p.join(', ') + ')'
 //::SvgGroup->SvgGroup
-const star = (g)=>{
+const star = (g) => {
     let starPath = gen_z_path(gen_star_points(50, 25, 5))
     return g.append('path')
         .attr('d', starPath)
         .attr('transform', 'rotate(-90)')
 }
-const circle = (g)=>{
+const circle = (g) => {
     return g.append('circle')
         .attr('cx', 0)
         .attr('yx', 0)
         .attr('r', 50)
 }
-const rect = (g)=>{
+const rect = (g) => {
     return g.append('rect')
         .attr('x', -50)
         .attr('y', -50)
         .attr('width', 100)
         .attr('height', 100)
 }
-const triangle_norm = (g)=>{
+const triangle_norm = (g) => {
     let points;
     let L = 50
-    let hL = L/2
-    points = [[hL, 0], [L, L], [0, L]].map(p=>[p[0], p[1]])//triagnl
+    let hL = L / 2
+    points = [[hL, 0], [L, L], [0, L]].map(p => [p[0], p[1]])//triagnl
     let trianglePath = gen_z_path(points)
     return g.append('path')
         .attr('d', trianglePath)
         .attr('transform', tr([-hL, -hL]))
 }
 
-const triangle_small = (g)=>{
+const triangle_small = (g) => {
     let points;
     let L = 50
-    let hL = L/2
-    points = [[hL, 0], [L, L], [0, L]].map(p=>[p[0], p[1]])//triagnl
+    let hL = L / 2
+    points = [[hL, 0], [L, L], [0, L]].map(p => [p[0], p[1]])//triagnl
     let trianglePath = gen_z_path(points)
     let transformations
     transformations = 'scale(0.5, 0.5)'
@@ -182,11 +187,11 @@ const triangle_small = (g)=>{
         .attr('transform', transformations)
 }
 
-const triangle_big = (g)=>{
+const triangle_big = (g) => {
     let points;
     let L = 50
-    let hL = L/2
-    points = [[hL, 0], [L, L], [0, L]].map(p=>[p[0], p[1]])//triagnl
+    let hL = L / 2
+    points = [[hL, 0], [L, L], [0, L]].map(p => [p[0], p[1]])//triagnl
     let trianglePath = gen_z_path(points)
     let transformations
     transformations = 'scale(1.5, 1.5)'
@@ -198,36 +203,36 @@ const triangle_big = (g)=>{
 
 var lineGenerator = d3.line();
 
-const grad_to_point = (grad)=>{
-    let k = Math.PI/180;
+const grad_to_point = (grad) => {
+    let k = Math.PI / 180;
     let x = Math.cos(k * grad);
     let y = Math.sin(k * grad);
     return [x, y];
 }
 
 
-const tf2 = x=>x.toFixed(2)
-const gen_path = (points=>{
-    let ls = points.slice(1, points.length).map(p=>"L" + p.map(tf2).join(',')).join('')
-    let ms  = "M" + points[0].map(tf2).join(',')
+const tf2 = x => x.toFixed(2)
+const gen_path = (points => {
+    let ls = points.slice(1, points.length).map(p => "L" + p.map(tf2).join(',')).join('')
+    let ms = "M" + points[0].map(tf2).join(',')
     return ms + ls
 })
 
-const gen_z_path = (points=>{
-    let ls = points.slice(1, points.length).map(p=>"L" + p.map(tf2).join(',')).join('')
-    let ms  = "M" + points[0].map(tf2).join(',')
-    return ms + ls +  "Z"
+const gen_z_path = (points => {
+    let ls = points.slice(1, points.length).map(p => "L" + p.map(tf2).join(',')).join('')
+    let ms = "M" + points[0].map(tf2).join(',')
+    return ms + ls + "Z"
 })
 
-const add_path = (main_g, p)=>{return main_g.append('g').append('path').attr('d', p)}
+const add_path = (main_g, p) => { return main_g.append('g').append('path').attr('d', p) }
 
 
-const gen_star_points = function(r1, r2, n) {
-    let dG = 360/n;
-    let dr = dG/2;
-    let grads = _.range(0, n).map(i=> { return i*dG; })
-    let grads2 = grads.map(grad=>grad + dr)
-    let points = grads.map(grad_to_point).map(p=>p.map(x=>x*r1))
-    let points2 = grads2.map(grad_to_point).map(p=>p.map(x=>x*r2))
-    return _.zip(points, points2).reduce((a, b)=>a.concat(b))
+const gen_star_points = function (r1, r2, n) {
+    let dG = 360 / n;
+    let dr = dG / 2;
+    let grads = _.range(0, n).map(i => { return i * dG; })
+    let grads2 = grads.map(grad => grad + dr)
+    let points = grads.map(grad_to_point).map(p => p.map(x => x * r1))
+    let points2 = grads2.map(grad_to_point).map(p => p.map(x => x * r2))
+    return _.zip(points, points2).reduce((a, b) => a.concat(b))
 }
