@@ -1,13 +1,15 @@
 const doubleArc = arcFactory("black", null, 'green', null);
-const fire = (...agrs) => (g) => {
-    agrs.forEach(arg=>{
+const fire = (...args) => (g) => {
+    args.forEach(arg=>{
       arg(g);
     })
+    return g
 }
+let a1 = fire(arc(1)(1), arc(-1)(1))
 let content = [
-    [arc(1)(1), rect1(-1)(0), rect1(1)(1)],
-    [step([rect1], 3), step([arc2],0), step([arc(1)], 0)],
-    [step([circle1, arc(-1)], 0), step([arc(1)], 0), step([arc3, rect1], 1)],
+    [a1, rect1(-1)(0), rect1(1)(1)],
+    [rect1(1)(1), rect1(1)(1), rect1(1)(1)],
+    [rect1(1)(1), rect1(1)(1), rect1(1)(1)],
 ]
 
 var svg = d3.select("#svgcontainer")
@@ -27,13 +29,21 @@ _.range(0, 3).forEach(i=>{
         pathY = "M" + [x, y].join(',') + "L" +  [x + H, y].join(',')
         let fn = content[i][j];//getting function that produced final svg group
         let cell_g = row.append('g').attr('class', 'cell')
+        cell_g.append('path').attr('d', pathX).attr('stroke', 'red')
+        cell_g.append('path').attr('d', pathY).attr('stroke', 'red')
         let cell = cell_g.append('g')
         let gx = fn(cell)
+        if (gx) {
         let trs = gx.attr('transform');//lifting transforms of returned group
         //let trs_args = tr([x + R/2,  y + R/2]);//this row for centering
         let trs_args = tr([x,  y])
         if (trs){ trs_args+= trs} //adding lifted transformations
         gx.attr('transform', trs_args)
+        } else {
+            console.log(gx)
+            console.log(fn)
+        }
+        //sometimes become undefined
     })
 })
 

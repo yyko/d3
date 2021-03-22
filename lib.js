@@ -1,6 +1,6 @@
-const vx1 = -50; const vy1 = -50; const vx2 = 1000; const vy2 = 500;
+const vx1 = -150; const vy1 = -150; const vx2 = 1000; const vy2 = 500;
 
-const H = 150; const R = H / 2; const CR = R / 2
+const H = 100; const R = H / 2; const CR = R / 2
 
 const arcFactory = (...args) => (i) => (g) => {
     let alfa = 10;
@@ -21,7 +21,10 @@ const arcFactory = (...args) => (i) => (g) => {
  }
 
 const arc = (spin) => (i) => (g) => {
+    console.log('spin: ' + spin)
+    console.log('step: ' + i)
     let rotation_step = 90;
+    let angle = spin * i * rotation_step
     let alfa = 10;
     let r = CR
     let dy = r * Math.cos(alfa * K)
@@ -30,14 +33,15 @@ const arc = (spin) => (i) => (g) => {
     let path = "M 0 0 A " + r + " " + r + ", 0, 0, 1, " + 2 * dx + " 0"
     path += ["L", dx, dy / 2].join(' ')
     path += "Z"
-    g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(0 ' + dx + ' ' + dy + ')')
+    let gr = g.append('g')
+    gr.append('path').attr('d', path).attr('transform', trs_args + 'rotate(0 ' + dx + ' ' + dy + ')')
         .attr('fill', 'none').attr('stroke', 'black')
-    g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(90 ' + dx + ' ' + dy + ')')
-    g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(-90 ' + dx + ' ' + dy + ')')
-    g.append('path').attr('d', path).attr('transform', trs_args + 'rotate(180 ' + dx + ' ' + dy + ')')
+    gr.append('path').attr('d', path).attr('transform', trs_args + 'rotate(90 ' + dx + ' ' + dy + ')')
+    gr.append('path').attr('d', path).attr('transform', trs_args + 'rotate(-90 ' + dx + ' ' + dy + ')')
+    gr.append('path').attr('d', path).attr('transform', trs_args + 'rotate(180 ' + dx + ' ' + dy + ')')
         .attr('fill', 'none').attr('stroke', 'black')
-    return g
-        .attr('transform', 'rotate(' + spin * i * rotation_step + ')')
+    return gr
+        .attr('transform', 'rotate(' + angle + ')')
 }
 
 const circle1 = (i) => (g) => {
