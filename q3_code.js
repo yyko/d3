@@ -38,8 +38,8 @@ _.range(0, 3).forEach(i=>{
         pathY = "M" + [x, y].join(',') + "L" +  [x + H, y].join(',')
         let fn = content[i][j];//getting function that produced final svg group
         let cell_g = row.append('g').attr('class', 'cell')
-        cell_g.append('path').attr('d', pathX).attr('stroke', 'red')
-        cell_g.append('path').attr('d', pathY).attr('stroke', 'red')
+        //cell_g.append('path').attr('d', pathX).attr('stroke', 'red')
+        //cell_g.append('path').attr('d', pathY).attr('stroke', 'red')
         let cell = cell_g.append('g')
         let gx = fn(cell)
         if (gx) {

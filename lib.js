@@ -1,4 +1,4 @@
-const vx1 = -150; const vy1 = -150; const vx2 = 1000; const vy2 = 500;
+const vx1 = -50; const vy1 = -50; const vx2 = 1000; const vy2 = 500;
 
 const H = 100; const R = H / 2; const CR = R / 2
 
