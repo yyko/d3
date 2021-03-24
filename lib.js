@@ -2,6 +2,28 @@ const vx1 = -50; const vy1 = -50; const vx2 = 1000; const vy2 = 500;
 
 const H = 100; const R = H / 2; const CR = R / 2
 
+const framed_cell = (...args)=>(g) => {
+    let h = 20; let w = h;
+    let ps = {
+        a: [0, 0], b: [w, 0],
+        c: [w, h], d: [0, h],
+    };
+    let paths = [];
+    paths[0] = gen_path([ps['a'], ps['b']])
+    paths[1] = gen_path([ps['b'], ps['c']])
+    paths[2] = gen_path([ps['c'], ps['d']])
+    paths[3] = gen_path([ps['d'], ps['a']])
+    let gr  = g.append('g')
+    args.forEach((arg, i)=>{
+        if (arg) {
+            gr.append('path')
+            .attr('d', paths[i])
+            .attr('stroke', 'black')
+        }
+    })
+    return gr;
+}
+
 const arcFactory = (...args) => (i) => (g) => {
     let alfa = 10;
     let r = CR
