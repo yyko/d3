@@ -11,8 +11,6 @@ var svg = d3.select("#svgcontainer")
     .attr("viewBox", [vx1, vy1, vx2, vy2].join(' '))
 
 var main_g = svg.append('g')
-const H = 80
-const R = H/2
 _.range(0, 3).forEach(i=>{
     let row = main_g.append('g')
     .attr('class', 'row')
