@@ -1,7 +1,19 @@
-const MONTHS_LENGTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+let show_grid = false;
+const MONTHS_LENGTHS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+const isLeap = (year) =>{
+    return (new Date(year + '/02/29')).getMonth() == 1;
+}
+const getMonthLength = (year, month) =>{
+    if (month == 1) {
+        return MONTHS_LENGTHS[month] + isLeap(year)
+    } else {
+        return MONTHS_LENGTHS[month]
+    }
+ }
 
-let content = _.range(0, 12).map(y=>{
-   let xs =  _.range(0, MONTHS_LENGTH[y]).map(i=>framed_cell(1, 1, 1, 1));
+let year = 2021
+let content = _.range(0, 12).map(month=>{
+   let xs =  _.range(0, getMonthLength(year, month)).map(i=>framed_cell(1, 1, 1, 1));
    return xs;
 })
 var svg = d3.select("#svgcontainer")
@@ -17,7 +29,6 @@ var main_g = svg.append('g')
 //this could be generated based on data Data Driven Development
 const cellSide = 20;
 let rows = []
-let show_grid = true;
 _.range(0, 25).forEach(i=>{
     let row = main_g.append('g')
     .attr('class', 'row')
