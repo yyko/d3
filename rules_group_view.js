@@ -17,11 +17,14 @@ var main_g = svg.append('g')
 //this could be generated based on data Data Driven Development
 const cellSide = 20;
 let rows = []
-_.range(0, 12).forEach(i=>{
+let show_grid = true;
+_.range(0, 25).forEach(i=>{
     let row = main_g.append('g')
     .attr('class', 'row')
     _.range(0, 31).forEach(j=>{
-        let pathX, pathY, x, y;
+        if (show_grid) {
+        let pathX, pathY, x, y, color;
+        color = '#F5F5F5'
         x = j*cellSide;y=i*cellSide;
         pathX = "M" + [x, y].join(',') + "L" +  [x, y + cellSide].join(',')
         pathY = "M" + [x, y].join(',') + "L" +  [x + cellSide, y].join(',')
@@ -29,11 +32,11 @@ _.range(0, 12).forEach(i=>{
         pathY_ = "M" + [x + cellSide, y].join(',') + "L" +  [x + cellSide, y + cellSide].join(',')
         let cell_g = row.append('g')
             .attr('class', 'cell')
-        cell_g.append('path').attr('d', pathX).attr('stroke', 'red')
-        cell_g.append('path').attr('d', pathY).attr('stroke', 'red');
-        cell_g.append('path').attr('d', pathX_).attr('stroke', 'red');
-        cell_g.append('path').attr('d', pathY_).attr('stroke', 'red');
-    })
-    //TODO add line to bottom
+        cell_g.append('path').attr('d', pathX).attr('stroke', color)
+        cell_g.append('path').attr('d', pathY).attr('stroke', color);
+        cell_g.append('path').attr('d', pathX_).attr('stroke', color);
+        cell_g.append('path').attr('d', pathY_).attr('stroke', color);
+        }
+      })
 })
 
