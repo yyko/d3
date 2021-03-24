@@ -1,6 +1,7 @@
+const MONTHS_LENGTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 let content = _.range(0, 12).map(y=>{
-   let xs =  _.range(0, 28).map(i=>framed_cell(1, 1, 1, 1));
+   let xs =  _.range(0, MONTHS_LENGTH[y]).map(i=>framed_cell(1, 1, 1, 1));
    return xs;
 })
 var svg = d3.select("#svgcontainer")
