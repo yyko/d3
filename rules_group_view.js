@@ -34,13 +34,15 @@ _.range(0, 25).forEach(i=>{
         }
         let fn;
         x = j*cellSide;y=i*cellSide;
-        if (content[i]) {fn = content[i][j];}
-        if(fn) {
-            let gx = fn(shape);
-            let trs = gx.attr('transform');//previous transformations
-            let current_transformations = ' translate(' +[x, y].join(',')  + ')';
-            let whole_transformations = trs?current_transformations + trs:current_transformations;
-            gx.attr('transform', whole_transformations)
+        if (content[i]) {
+            fn = content[i][j];
+            if(fn) {
+                let gx = fn(shape);
+                let trs = gx.attr('transform');//previous transformations
+                let current_transformations = ' translate(' +[x, y].join(',')  + ')';
+                let whole_transformations = trs?current_transformations + trs:current_transformations;
+                gx.attr('transform', whole_transformations)
+            }
         }
       })
 })
