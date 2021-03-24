@@ -1,4 +1,8 @@
 
+let content = _.range(0, 12).map(y=>{
+   let xs =  _.range(0, 28).map(i=>framed_cell(1, 1, 1, 1));
+   return xs;
+})
 var svg = d3.select("#svgcontainer")
     .append("svg")
     .attr("width", 1200)
