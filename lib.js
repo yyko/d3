@@ -2,6 +2,13 @@ const vx1 = -50; const vy1 = -50; const vx2 = 1000; const vy2 = 500;
 
 const H = 100; const R = H / 2; const CR = R / 2
 
+const comb = (...args) => (g) => {
+    args.forEach(arg=>{
+      arg(g);
+    })
+    return g
+}
+
 const framed_cell = (...args)=>(g) => {
     let h = 20; let w = h;
     let ps = {

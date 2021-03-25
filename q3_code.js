@@ -1,10 +1,5 @@
 const doubleArc = arcFactory("black", null, 'green', null);
-const comb = (...args) => (g) => {
-    args.forEach(arg=>{
-      arg(g);
-    })
-    return g
-}
+
 let a1 = comb(arc(1)(0), rect1(1)(0))
 let a2 = comb(arc(1)(1), rect1(1)(1))
 let a3 = comb(arc(1)(2), rect1(1)(2))
