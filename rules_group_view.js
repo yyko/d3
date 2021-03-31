@@ -13,7 +13,7 @@ const getMonthLength = (year, month) =>{
 
 let year = 2021
 let content = _.range(0, 12).map(month=>{
-   let xs =  _.range(0, getMonthLength(year, month)).map(i=>framed_cell(1, 1, 1, 1));
+   let xs =  _.range(0, getMonthLength(year, month)).map(i=>comb(framed_cell(1, 1, 1, 1), rct(0, 0, 20, 20)));
    return xs;
 })
 var svg = d3.select("#svgcontainer")
