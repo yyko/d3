@@ -192,6 +192,7 @@ const encripted = (n) => (g) => {
 }
 
 const K = Math.PI / 180;
+//::[]->String
 const tr = (p) => 'translate(' + p.join(', ') + ')'
 //::SvgGroup->SvgGroup
 const star = (g) => {
