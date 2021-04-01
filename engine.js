@@ -14,14 +14,25 @@ svg.append('path')
     .attr('stroke-width', 1)
     .attr("transform", tr([100, 100]) + 'scale (1 1) ' )
 
+<<<<<<< HEAD
 const rec = ()=> {
     svg.select('#engine')
     .transition()
+=======
+for(var i=0;i<1000;i++) {
+    svg.select('#engine')
+    .transition()
+    .delay(i*200)
+>>>>>>> b86565d7d0ac517072113edd8bcdd3e8e13178e4
     .duration(100)
     .attr("transform", tr([100, 100]) + 'scale (' + (1 + SCALE_SHIFT) + ', ' + (1 + SCALE_SHIFT ) + ') ' )
     .transition()
     .duration(100)
     .attr("transform", tr([100, 100]) + 'scale (1 1) ' )
+<<<<<<< HEAD
     setTimeout(rec, 200);
 }
 setTimeout(rec, 200);
+=======
+}
+>>>>>>> b86565d7d0ac517072113edd8bcdd3e8e13178e4
