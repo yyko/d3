@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.7.0/d3.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<title>D3-Inkscscape tutorial</title>
+</head>
+<body>
+<div id="viz"></div>
+<script type="text/javascript">
+const url = "http://127.0.0.1:8080/girl.svg"
+const type = "GET"
+/*
+$.ajax({url, type, dataType:"text", success:res=>{
+    console.log(res)
+    const elem = document.getElementById('viz')
+    elem.innerHTML = res;
+}});
+*/
+d3.xml(url, "image/svg+xml", function(xml) {
+    console.log(xml)
+    var importedNode = document.importNode(xml.documentElement, true);
+    d3.select("#viz").node().appendChild(importedNode);
+});
+
+</script>
+</body>
+</html>
