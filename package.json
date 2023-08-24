@@ -13,6 +13,7 @@
     "d3.js": "0.0.2-security",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
+    "mysql2": "^3.6.0",
     "prime-number": "^1.0.2",
     "underscore": "^1.12.1"
   }
