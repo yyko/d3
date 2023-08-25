@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const port = 7777;
-const Db = require('./db.js')
+const { Db } = require('./db.js')
 let db;
 
 app.get("/", async (request, response) => {
