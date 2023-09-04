@@ -1,5 +1,7 @@
+const mysql = require('mysql2/promise')
+
 class Db {
-  constructor (user, password, dbName, host) {
+  constructor ({user, password, dbName, host}) {
     this.user = user
     this.password = password
     this.dbName = dbName
